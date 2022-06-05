@@ -29,6 +29,7 @@ $row=mysqli_fetch_assoc($result);
     <div id="blank"></div>
     <div id="desc">
       <div id="inner">
+      <p id="message"><?php if(!empty($_SESSION['message'])){echo $_SESSION['message'];$_SESSION['message']="";}  ?></p>
         <h2>Edit your profile</h2>
         <br /><br /><br />
 
@@ -51,7 +52,7 @@ $row=mysqli_fetch_assoc($result);
           Current picture:
           <img src="data:image;base64,<?php echo base64_encode($row['image']); ?>" width="100px" height="100px">
           </div>
-       
+       <?php echo $_SESSION['logged_email']; ?>
           <div style="width: 100%; float: left">
             <input class="sub1" name="update" type="submit" />
           </div>

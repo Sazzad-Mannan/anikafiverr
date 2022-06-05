@@ -40,6 +40,7 @@ if(isset($_POST['login'])){
 
         $_SESSION['message']= "Login Successful.";
         $_SESSION['logged_email']=$email;
+        $_SESSION['logged_id']=$row['id'];
         header("Location: editprofile.php");
         die();
     }
@@ -56,44 +57,46 @@ if(isset($_POST['update'])){
 
     
     $email=mysqli_real_escape_string($conn,$_POST['email']);
-    
     $description=mysqli_real_escape_string($conn,$_POST['des']);
+    $oldemail=$_SESSION['logged_email'];
 
     $sql="SELECT * FROM user WHERE email='".$email."'";
     $result=mysqli_query($conn,$sql);
-    
-    if($result->num_rows>0){
-        $_SESSION['message']= "This email already exist in data.";
-        header("Location: login.php");
+    $row=mysqli_fetch_assoc($result);
+
+    if($result->num_rows>0 && $email!=$oldemail){
+        $_SESSION['message']= "This email already exist in database.";
+        header("Location: editprofile.php");
         die();
     }
 
-
-    if ($_FILES['profile_pic']['size'] == 0 && $_FILES['profile_pic']['error'] == 0){
+$id=$_SESSION['logged_id'];
+    if ($_FILES['profile_pic']['name']=='')
+{
+     
+      
+    $sql= "UPDATE user SET email = '".$email."', description = '".$description."'  WHERE id = '".$id."'";
+    $result=mysqli_query($conn,$sql);
         
-        $oldemail=$_SESSION['logged_email'];
-        $sql= "UPDATE user SET email = '".$email."', description = '".$description."'  WHERE email = '".$oldemail."'";
-        $result=mysqli_query($conn,$sql);
     }else{
         
+    
+
         $filename= basename($_FILES['profile_pic']['name']);
         $filetype= pathinfo($filename,PATHINFO_EXTENSION);
         $image=$_FILES['profile_pic']['tmp_name'];
         $imgcontent=addslashes(file_get_contents($image));
-        $oldemail=$_SESSION['logged_email'];
-        $sql= "UPDATE user SET email = '".$email."', description = '".$description."', image='".$imgcontent."' WHERE email = '".$oldemail."'";
+        
+        $sql= "UPDATE user SET email = '".$email."', description = '".$description."', image='".$imgcontent."' WHERE id = '".$id."'";
         $result=mysqli_query($conn,$sql);
     }
 
 
-    
-
-
-    $sql= "INSERT INTO user (name, email, pass, description, image) VALUES ('".$name."', '".$email."', '".$pwd."', '".$description."', '".$imgcontent."')";
-    $result=mysqli_query($conn,$sql);
     if($result){
-        $_SESSION['message']= "Registered Successfully. Login please.";
-        header("Location: login.php");
+        $_SESSION['message']= "Profile updated successfully.";
+        $_SESSION['logged_email']=$email;
+        
+        header("Location: editprofile.php");
         die();
     }
 

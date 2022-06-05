@@ -6,7 +6,9 @@ body {
 h4 {
   margin: 0;
 }
-
+#message {
+  color: brown;
+}
 /*home page*/
 #nav {
   width: 100%;

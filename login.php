@@ -13,7 +13,7 @@ session_start();
     <div id="login">
       <div id="inner">
         <h2>Login</h2>
-        <p><?php if(!empty($_SESSION['message'])){echo $_SESSION['message'];$_SESSION['message']="";}  ?></p>
+        <p id="message"><?php if(!empty($_SESSION['message'])){echo $_SESSION['message'];$_SESSION['message']="";}  ?></p>
         <br /><br /><br />
       
 
