@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <html>
   <head>
     <link href="includes/css/style.css" rel="stylesheet" />
@@ -6,11 +9,11 @@
   <body>
     <div id="nav">
       <ul>
-        <a href="index.html"><li>Home</li></a>
-        <a href="Order.html"><li>Order</li></a>
-        <a href="about_us.html"><li>About Us</li></a>
-        <a href="rates.html"><li class="active">Rates</li></a>
-        <a href="admin.html"><li>Admin Page</li></a>
+        <a href="index.php"><li>Home</li></a>
+        <a href="Order.php"><li>Order</li></a>
+        <a href="about_us.php"><li>About Us</li></a>
+        <a href="rates.php"><li class="active">Rates</li></a>
+        <a href="editprofile.php"><li>Edit Profile</li></a>
       </ul>
     </div>
     <div id="blank"></div>
