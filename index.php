@@ -1,5 +1,11 @@
 <?php
 session_start();
+
+include "includes/db/config.php";
+
+$sql="SELECT * FROM user";
+$result=mysqli_query($conn,$sql);
+
 ?>
 
 <html>
@@ -94,14 +100,14 @@ session_start();
             About Us</button
           ><br />
         </div>
+        <?php if($result->num_rows>0){
+  while($row = mysqli_fetch_array($result)){
+?>
         <div id="cont2">
-          <img src="includes/images/client1.jpg" /><br />
-          Someone's Name
+          <img src="data:image;base64,<?php echo base64_encode($row['image']); ?>" /><br />
+          <?php echo $row['name']; ?>
         </div>
-        <div id="cont2">
-          <img src="includes/images/client2.jpg" /><br />
-          Someone's Name
-        </div>
+      <?php }} ?>
       </div>
     </div>
     <div id="vision">

@@ -1,5 +1,11 @@
 <?php
 session_start();
+
+include "includes/db/config.php";
+
+$sql="SELECT * FROM user";
+$result=mysqli_query($conn,$sql);
+
 ?>
 <html>
   <head>
@@ -19,86 +25,40 @@ session_start();
     <div id="blank"></div>
     <div id="desc2">
       <div id="inner">
+
+<?php if($result->num_rows>0){
+  while($row = mysqli_fetch_array($result)){
+?>
+
         <div id="cont3">
           <h3>
-            Sazzad Mannan Rifat
+            <?php  echo $row['name'];?>
             <span style="font-size: 11px; color: darkgrey; font-style: italic"
-              >sjkdhfsdjfhskdj</span
+              ></span
             >
           </h3>
 
-          <img id="cl_img" src="includes/images/client1.jpg" />
+          <img id="cl_img" src="data:image;base64,<?php echo base64_encode($row['image']); ?>" />
 
           <p id="cl_desc">
-            As a child of deaf parents, I am at home in the world of deaf and
-            sign language. So early on I thought about working as an
-            interpreter, which I pushed aside for a few years. Growing up among
-            the deaf, I was able to observe their needs and barriers in everyday
-            life very well. I've often acted as an interpreter for smaller
-            conversations and was thus able to gain initial experience in the
-            professional field. Through traveling around the world, I also came
-            into contact with different sign languages ​​in the world and
-            learned to converse with these deaf people, albeit in a roundabout
-            way. I always try to keep myself up to date with the latest news
-            from the deaf world, new gestures, techniques and topics. Through
-            preparatory courses, internships and further training, I
-            successfully passed the state examination as an interpreter for
-            German sign language and spoken language in Nuremberg in March 2017
-            and I am very happy to be able to continue to move in the sign
-            language community.
+           <?php echo $row['description'];  ?>
           </p>
           <div id="cl_add">
             <h3>Contact</h3>
-            <b>Dario Heinrich</b> <br />
+            <!--b>Dario Heinrich</b> <br />
             State Examined, Nuremberg<br /><br />
 
             Mobile 0157.32 51 30 99<br />
             Mobile 0177.538 29 59<br />
             Tel. 0521.237 20 52<br />
-            Fax 0521.237 20 53<br />
-            <a href="">interpreting.heinrich(at)web.de</a><br />
+            Fax 0521.237 20 53<br /-->
+           Email: <?php echo $row['email']; ?><br />
           </div>
         </div>
-        <div id="cont3">
-          <h3>
-            Sazzad Mannan Rifat
-            <span style="font-size: 11px; color: darkgrey; font-style: italic"
-              >sjkdhfsdjfhskdj</span
-            >
-          </h3>
 
-          <img id="cl_img" src="includes/images/client1.jpg" />
 
-          <p id="cl_desc">
-            As a child of deaf parents, I am at home in the world of deaf and
-            sign language. So early on I thought about working as an
-            interpreter, which I pushed aside for a few years. Growing up among
-            the deaf, I was able to observe their needs and barriers in everyday
-            life very well. I've often acted as an interpreter for smaller
-            conversations and was thus able to gain initial experience in the
-            professional field. Through traveling around the world, I also came
-            into contact with different sign languages ​​in the world and
-            learned to converse with these deaf people, albeit in a roundabout
-            way. I always try to keep myself up to date with the latest news
-            from the deaf world, new gestures, techniques and topics. Through
-            preparatory courses, internships and further training, I
-            successfully passed the state examination as an interpreter for
-            German sign language and spoken language in Nuremberg in March 2017
-            and I am very happy to be able to continue to move in the sign
-            language community.
-          </p>
-          <div id="cl_add">
-            <h3>Contact</h3>
-            <b>Dario Heinrich</b> <br />
-            State Examined, Nuremberg<br /><br />
-
-            Mobile 0157.32 51 30 99<br />
-            Mobile 0177.538 29 59<br />
-            Tel. 0521.237 20 52<br />
-            Fax 0521.237 20 53<br />
-            <a href="">interpreting.heinrich(at)web.de</a><br />
-          </div>
-        </div>
+        <?php  }} ?>
+  
       </div>
     </div>
 

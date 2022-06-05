@@ -24,13 +24,16 @@ $row=mysqli_fetch_assoc($result);
         <a href="about_us.php"><li>About Us</li></a>
         <a href="rates.php"><li>Rates</li></a>
         <a href="editprofile.php"><li class="active">Edit Profile</li></a>
+        
       </ul>
     </div>
     <div id="blank"></div>
     <div id="desc">
       <div id="inner">
-      <p id="message"><?php if(!empty($_SESSION['message'])){echo $_SESSION['message'];$_SESSION['message']="";}  ?></p>
-        <h2>Edit your profile</h2>
+      <p style="color: brown;text-align: center;"><?php if(!empty($_SESSION['message'])){echo $_SESSION['message'];$_SESSION['message']="";}  ?></p>
+      <a href="functions.php?type=logout"><button style="float: right;padding: 5px;">Logout</button> </a>
+      
+      <h2>Edit your profile</h2>
         <br /><br /><br />
 
         <form id="form2" action="functions.php" method="post" enctype="multipart/form-data">
@@ -52,7 +55,7 @@ $row=mysqli_fetch_assoc($result);
           Current picture:
           <img src="data:image;base64,<?php echo base64_encode($row['image']); ?>" width="100px" height="100px">
           </div>
-       <?php echo $_SESSION['logged_email']; ?>
+ 
           <div style="width: 100%; float: left">
             <input class="sub1" name="update" type="submit" />
           </div>

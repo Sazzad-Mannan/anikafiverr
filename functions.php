@@ -9,7 +9,16 @@ if(isset($_POST['register'])){
     $pass=mysqli_real_escape_string($conn,$_POST['pass']);
     $description=mysqli_real_escape_string($conn,$_POST['des']);
 
+    
     $pwd = password_hash($pass,PASSWORD_DEFAULT); 
+
+    $sql="SELECT * FROM user WHERE email='".$email."'";
+    $result=mysqli_query($conn,$sql);
+    if($result->num_rows>0){
+        $_SESSION['message']= "This email already exist in database.Use another email.";
+        header("Location: registration.php");
+        die();
+    }
 
     $filename= basename($_FILES['profile_pic']['name']);
     $filetype= pathinfo($filename,PATHINFO_EXTENSION);
@@ -100,6 +109,13 @@ $id=$_SESSION['logged_id'];
         die();
     }
 
+}
+
+if(isset($_GET['type']) && $_GET['type']=='logout'){
+    session_destroy();
+    $_SESSION['message']= "Logged out successfully.";
+    header("Location: login.php");
+    die();
 }
 
 

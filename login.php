@@ -1,7 +1,5 @@
 <?php 
 session_start();
-
-
 ?>
 <html>
   <head>
@@ -13,7 +11,7 @@ session_start();
     <div id="login">
       <div id="inner">
         <h2>Login</h2>
-        <p id="message"><?php if(!empty($_SESSION['message'])){echo $_SESSION['message'];$_SESSION['message']="";}  ?></p>
+        <p style="color: brown;text-align: center;"><?php if(!empty($_SESSION['message'])){echo $_SESSION['message'];$_SESSION['message']="";}  ?></p>
         <br /><br /><br />
       
 
