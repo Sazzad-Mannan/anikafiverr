@@ -1,5 +1,14 @@
 <?php
 session_start();
+
+include "includes/db/config.php";
+
+$sql2="SELECT * FROM contents";
+$result2=mysqli_query($conn,$sql2);
+$row2=mysqli_fetch_assoc($result2);
+
+$sql3="SELECT * FROM rates";
+$result3=mysqli_query($conn,$sql3);
 ?>
 <html>
   <head>
@@ -19,60 +28,29 @@ session_start();
     <div id="blank"></div>
     <div id="desc">
       <div id="inner">
-        <h2>Our Tarrif</h2>
+        <h2><?php echo $row2['rates_heading'];  ?></h2>
         <p>
-          For more information and a quote, please contact the interpreter of
-          your choice. You will receive an answer to your inquiry within 24
-          hours whenever possible.
+        <?php echo $row2['rates_description'];  ?>
         </p>
       </div>
     </div>
     <div id="services">
       <div id="inner">
+
+      <?php if($result3->num_rows>0){
+  while($row3 = mysqli_fetch_array($result3)){
+?>
+
         <div id="cont4">
           <div id="cont4_inner">
-            <b>Interpreting service for IV offices (work/training)</b>
+            <b><?php echo $row3['heading'];  ?></b>
             <p>
-              <span>At least one hour will be charged.</span><br /><br />
-              For assignments with a high level of preparation, a flat-rate
-              preparation fee will be charged.
+            <?php echo $row3['description'];  ?>
             </p>
           </div>
-          <button>CHF120/h</button>
+          <button>CHF<?php echo $row3['price'];  ?>/h</button>
         </div>
-        <div id="cont4">
-          <div id="cont4_inner">
-            <b>Interpreting service for IV offices (work/training)</b>
-            <p>
-              <span>At least one hour will be charged.</span><br /><br />
-              For assignments with a high level of preparation, a flat-rate
-              preparation fee will be charged.
-            </p>
-          </div>
-          <button>CHF120/h</button>
-        </div>
-        <div id="cont4">
-          <div id="cont4_inner">
-            <b>Interpreting service for IV offices (work/training)</b>
-            <p>
-              <span>At least one hour will be charged.</span><br /><br />
-              For assignments with a high level of preparation, a flat-rate
-              preparation fee will be charged.
-            </p>
-          </div>
-          <button>CHF120/h</button>
-        </div>
-        <div id="cont4">
-          <div id="cont4_inner">
-            <b>Interpreting service for IV offices (work/training)</b>
-            <p>
-              <span>At least one hour will be charged.</span><br /><br />
-              For assignments with a high level of preparation, a flat-rate
-              preparation fee will be charged.
-            </p>
-          </div>
-          <button>CHF120/h</button>
-        </div>
+      <?php  }} ?>
       </div>
     </div>
     <div id="cancel_cost">
@@ -82,19 +60,13 @@ session_start();
       >
         <p>
           <b>Cancellation Costs</b><br /><br />
-          100% of the ordered interpreting time for cancellations under 24
-          hours, also applies to cuts on site.<br /><br />
-          100% of the ordered interpreting time and travel time in the event of
-          on-site cancellation.<br /><br />
-          75% of the ordered interpreting time for cancellations of less than
-          five working days.<br /><br />
+          <?php echo $row2['cancelation_cost_text'];  ?>
         </p>
       </div>
     </div>
     <div id="vision">
       <h3>Our Vision</h3>
-      We give deaf people access to communication, information and networks,
-      thereby contributing to their empowerment and inclusion in society.
+      <?php echo $row2['vision_description'];  ?>
     </div>
     <div id="footer"></div>
   </body>

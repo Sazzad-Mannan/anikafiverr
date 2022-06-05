@@ -1,5 +1,12 @@
 <?php
 session_start();
+
+include "includes/db/config.php";
+
+$sql2="SELECT * FROM contents";
+$result2=mysqli_query($conn,$sql2);
+$row2=mysqli_fetch_assoc($result2);
+
 ?>
 <html>
   <head>
@@ -19,11 +26,9 @@ session_start();
     <div id="blank"></div>
     <div id="desc">
       <div id="inner">
-        <h2>order form</h2>
+        <h2><?php echo $row2['order_heading'];  ?></h2>
         <p>
-          You can send us your request here. We will reply as soon as possible.
-          Alternatively, you can send us an email to thiemeyer@netzwerk-gsd.ch
-          or wuethrich@netzwerk-gsd.ch.
+        <?php echo $row2['order_description'];  ?>
         </p>
       </div>
     </div>
@@ -36,34 +41,34 @@ session_start();
           <div style="float: left; width: 100%">
             <h4>Customer:</h4>
             <input class="fr_el_l" type="text" placeholder="First Name" />
-            <input class="fr_el_r" type="text" placeholder="Last Name" />
-            <input class="fr_el_l" type="text" placeholder="First Name" />
-            <input class="fr_el_r" type="text" placeholder="Last Name" />
-            <input class="fr_el_l" type="text" placeholder="First Name" />
+            <input class="fr_el_r" type="number" placeholder="Phone" />
+            <input class="fr_el_l" type="text" placeholder="Sur Name" />
+            <input class="fr_el_r" type="email" placeholder="Email Address" />
+            <input class="fr_el_l" type="text" placeholder="Company" />
           </div>
           <div style="float: left; width: 100%; margin-top: 65px">
             <h4>Mission:</h4>
-            <input class="fr_el_l" type="text" placeholder="First Name" />
+            <input class="fr_el_l" type="text" placeholder="Date of use" />
             <input
               class="fr_el_r nodisplay"
-              type="text"
-              placeholder="Last Name"
+              type="date"
+              placeholder="Date of use"
             />
-            <input class="fr_el_l" type="text" placeholder="First Name" />
-            <input class="fr_el_r" type="text" placeholder="Last Name" />
-            <input class="fr_el_l" type="text" placeholder="First Name" />
-            <input class="fr_el_r" type="text" placeholder="Last Name" />
-            <input class="fr_el_l" type="text" placeholder="First Name" />
-            <input class="fr_el_r" type="text" placeholder="Last Name" />
-            <input class="fr_el_l" type="text" placeholder="First Name" />
-            <input class="fr_el_r" type="text" placeholder="Last Name" />
+            <input class="fr_el_l" type="text" placeholder="Start time of assignment" />
+            <input class="fr_el_r" type="text" placeholder="End time of assignment" />
+            <input class="fr_el_l" type="text" placeholder="Operation area" />
+            <input class="fr_el_r" type="text" placeholder="Use content/topic" />
+            <input class="fr_el_l" type="text" placeholder="Location" />
+            <input class="fr_el_r" type="text" placeholder="Meeting Point" />
+            <input class="fr_el_l" type="text" placeholder="Contact person" />
+            <input class="fr_el_r" type="text" placeholder="Email contact person" />
 
             <textarea placeholder="people present" class="fr_el_l"></textarea
             ><br />
           </div>
           <select class="fr_el_l">
-            <option>fgsdfg</option>
-            <option>sff</option>
+            <option>Desired interpration</option>
+            <option>Celina Thiemeyer</option>
             <option>fdgd</option>
             <option>dgd</option>
           </select>
@@ -75,8 +80,7 @@ session_start();
     </div>
     <div id="vision">
       <h3>Our Vision</h3>
-      We give deaf people access to communication, information and networks,
-      thereby contributing to their empowerment and inclusion in society.
+      <?php echo $row2['vision_description'];  ?>
     </div>
     <div id="footer"></div>
   </body>
